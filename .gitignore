@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Backend
+paradise hotel BE/node_modules/
+paradise hotel BE/.env
+paradise hotel BE/data/*.sqlite
+paradise hotel BE/data/*.sqlite-*
+
+# Frontend local env files (safety at root level)
+ParadiseHotelFrontend/.env.local
+ParadiseHotelFrontend/.env.development.local
+ParadiseHotelFrontend/.env.test.local
+ParadiseHotelFrontend/.env.production.local
