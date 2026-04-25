@@ -21,12 +21,13 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="reservations" element={<Reservations />} />
-          <Route path="locations" element={<AdminLocations />} />
+          
 
           
           <Route path="admin" element={<AdminRoute />}>
             <Route index element={<AdminDashboard />} />
             <Route path="reservations" element={<AdminReservations />} />
+            <Route path="locations" element={<AdminLocations />} />
           </Route>
 
         </Route>

@@ -9,11 +9,14 @@ import { AuthContext } from '../context/AuthContext';
 function Home() {
   const { user } = useContext(AuthContext);
 
+  // Стейт со всеми необходимыми полями по ТЗ (включая search и rating)
   const [searchParams, setSearchParams] = useState({
     checkIn: '',
     checkOut: '',
     guests: 1,
+    search: '',
     city: '',
+    rating: '',
     freeParking: false,
     wellnessCenter: false
   });
@@ -64,28 +67,67 @@ function Home() {
 
   return (
     <Box>
-      
       <Box sx={{ p: 3, mb: 4, bgcolor: '#f0f7fb', borderRadius: 2 }}>
         <Typography variant="h5" gutterBottom>Find Your Paradise</Typography>
         <form onSubmit={handleSearch}>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs={12} sm={3}>
-              <TextField fullWidth type="date" label="Check-In" name="checkIn" required
-                value={searchParams.checkIn} onChange={handleChange} InputLabelProps={{ shrink: true }} />
+            
+            {/* Row 1: Required fields (dates and guests) */}
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Check-In"
+                name="checkIn"
+                required
+                value={searchParams.checkIn}
+                onChange={handleChange}
+                type={searchParams.checkIn ? 'date' : 'text'}
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => { if (!searchParams.checkIn) e.target.type = 'text'; }}
+              />
             </Grid>
-            <Grid item xs={12} sm={3}>
-              <TextField fullWidth type="date" label="Check-Out" name="checkOut" required
-                value={searchParams.checkOut} onChange={handleChange} InputLabelProps={{ shrink: true }} />
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                label="Check-Out"
+                name="checkOut"
+                required
+                value={searchParams.checkOut}
+                onChange={handleChange}
+                type={searchParams.checkOut ? 'date' : 'text'}
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => { if (!searchParams.checkOut) e.target.type = 'text'; }}
+              />
             </Grid>
-            <Grid item xs={12} sm={2}>
-              <TextField fullWidth type="number" label="Guests" name="guests" required
-                inputProps={{ min: 1 }} value={searchParams.guests} onChange={handleChange} />
+            <Grid item xs={12} sm={4}>
+              <TextField
+                fullWidth
+                type="number"
+                label="Guests"
+                name="guests"
+                required
+                inputProps={{ min: 1 }}
+                value={searchParams.guests}
+                onChange={handleChange}
+              />
+            </Grid>
+
+            
+            <Grid item xs={12} sm={4}>
+              <TextField fullWidth type="text" label="Hotel Name (Optional)" name="search"
+                value={searchParams.search} onChange={handleChange} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField fullWidth type="text" label="City (Optional)" name="city"
                 value={searchParams.city} onChange={handleChange} />
             </Grid>
             <Grid item xs={12} sm={4}>
+              <TextField fullWidth type="number" label="Min Rating (1-5)" name="rating"
+                inputProps={{ min: 1, max: 5, step: 0.1 }} value={searchParams.rating} onChange={handleChange} />
+            </Grid>
+
+            
+            <Grid item xs={12} sm={8}>
               <FormControlLabel 
                 control={<Checkbox name="freeParking" checked={searchParams.freeParking} onChange={handleChange} />} 
                 label="Free Parking" 
@@ -100,6 +142,7 @@ function Home() {
                 Search Rooms
               </Button>
             </Grid>
+
           </Grid>
         </form>
       </Box>
