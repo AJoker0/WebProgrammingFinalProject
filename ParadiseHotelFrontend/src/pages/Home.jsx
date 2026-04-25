@@ -7,9 +7,8 @@ import api from '../api/axiosConfig';
 import { AuthContext } from '../context/AuthContext';
 
 function Home() {
-  const { user } = useContext(AuthContext); // Проверяем, залогинен ли юзер
+  const { user } = useContext(AuthContext);
 
-  // Состояние для формы поиска
   const [searchParams, setSearchParams] = useState({
     checkIn: '',
     checkOut: '',
@@ -19,34 +18,28 @@ function Home() {
     wellnessCenter: false
   });
 
-  // Состояние для результатов и ошибок
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
-  // Обработка изменений в полях ввода
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setSearchParams({ ...searchParams, [e.target.name]: value });
   };
 
-  // Отправка запроса на поиск
   const handleSearch = async (e) => {
     e.preventDefault();
     setError('');
     
     try {
-      // GET-запросы в Axios передают параметры через объект params
       const response = await api.get('/rooms/availability', { params: searchParams });
       setRooms(response.data.rooms || []);
       setHasSearched(true);
     } catch (err) {
-      setError(err.response?.data?.message || 'Ошибка при поиске номеров');
+      setError(err.response?.data?.message || 'Failed to search rooms');
     }
   };
 
-  // Функция для бронирования (пока просто заглушка)
-  // Обновленная функция для бронирования
   const handleBookRoom = async (roomId) => {
     if (!user) {
       alert("Please log in to book a room!");
@@ -54,19 +47,18 @@ function Home() {
     }
     
     try {
-      // Собираем данные для бэкенда согласно API документации
       const bookingData = {
         roomId: roomId,
         checkIn: searchParams.checkIn,
         checkOut: searchParams.checkOut,
-        guests: Number(searchParams.guests) // Убеждаемся, что это число
+        guests: Number(searchParams.guests)
       };
       
       await api.post('/reservations', bookingData);
-      alert("Успешно! Номер забронирован. Вы можете найти его во вкладке My Reservations.");
+      alert('Success! Room booked. You can find it in My Reservations.');
       
     } catch (err) {
-      alert(err.response?.data?.message || "Ошибка при бронировании");
+      alert(err.response?.data?.message || 'Booking failed');
     }
   };
 
@@ -78,7 +70,6 @@ function Home() {
         <form onSubmit={handleSearch}>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={3}>
-              {/* InputLabelProps={{ shrink: true }} нужен, чтобы текст-подсказка не наезжал на дату */}
               <TextField fullWidth type="date" label="Check-In" name="checkIn" required
                 value={searchParams.checkIn} onChange={handleChange} InputLabelProps={{ shrink: true }} />
             </Grid>
@@ -113,7 +104,6 @@ function Home() {
         </form>
       </Box>
 
-      {/* --- БЛОК 2: Результаты поиска --- */}
       {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
       {hasSearched && rooms.length === 0 && (

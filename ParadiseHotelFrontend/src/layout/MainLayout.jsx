@@ -8,8 +8,8 @@ function MainLayout() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // clean data from context and LocalStorage
-    navigate('/login'); // send user to login page after logout
+    logout();
+    navigate('/login');
   };
 
   return (
@@ -28,12 +28,15 @@ function MainLayout() {
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/reservations">My Reservations</Button>
-                
-                
+
                 {user.role === 'admin' && (
-                  <Button color="inherit" component={Link} to="/admin">Dashboard</Button>
+                  <>
+                    <Button color="inherit" component={Link} to="/admin">Dashboard</Button>
+                    <Button color="inherit" component={Link} to="/admin/reservations">All Res.</Button>
+                    <Button color="inherit" component={Link} to="/admin/locations">Locations</Button>
+                  </>
                 )}
-                
+
                 <Button color="inherit" onClick={handleLogout}>
                   Logout ({user.name})
                 </Button>

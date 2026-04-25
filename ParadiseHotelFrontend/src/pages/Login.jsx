@@ -2,11 +2,11 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography, Alert } from '@mui/material';
 import api from '../api/axiosConfig';
-import { AuthContext } from '../context/AuthContext'; // Импортируем контекст
+import { AuthContext } from '../context/AuthContext';
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Достаем функцию login
+  const { login } = useContext(AuthContext);
   
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
@@ -19,16 +19,13 @@ function Login() {
     e.preventDefault();
     try {
       const response = await api.post('/auth/login', formData);
-      // Бэкенд присылает token и объект user
       const { token, user } = response.data;
-      
-      // Сохраняем в контекст и LocalStorage
-      login(user, token); 
-      
-      // Перенаправляем на главную
+
+      login(user, token);
+
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Неверный email или пароль');
+      setError(err.response?.data?.message || 'Invalid email or password');
     }
   };
 

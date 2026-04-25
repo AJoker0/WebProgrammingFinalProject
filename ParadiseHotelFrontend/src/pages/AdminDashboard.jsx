@@ -10,10 +10,9 @@ function AdminDashboard() {
     const fetchStats = async () => {
       try {
         const response = await api.get('/admin/dashboard');
-        // Вспоминаем структуру DTO из задания: response.data.summary
         setStats(response.data.summary);
       } catch (err) {
-        setError('Не удалось загрузить статистику. Проверьте права доступа.');
+        setError('Failed to load statistics. Please check your access rights.');
       }
     };
     fetchStats();
@@ -27,7 +26,6 @@ function AdminDashboard() {
       <Typography variant="h4" gutterBottom>Admin Dashboard</Typography>
       
       <Grid container spacing={3}>
-        {/* Карточка 1: Пользователи */}
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ bgcolor: '#e3f2fd' }}>
             <CardContent>
@@ -37,7 +35,6 @@ function AdminDashboard() {
           </Card>
         </Grid>
 
-        {/* Карточка 2: Локации */}
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ bgcolor: '#f3e5f5' }}>
             <CardContent>
@@ -47,7 +44,6 @@ function AdminDashboard() {
           </Card>
         </Grid>
 
-        {/* Карточка 3: Активные брони */}
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ bgcolor: '#e8f5e9' }}>
             <CardContent>
@@ -57,7 +53,6 @@ function AdminDashboard() {
           </Card>
         </Grid>
 
-        {/* Карточка 4: Отмененные брони */}
         <Grid item xs={12} sm={6} md={3}>
           <Card sx={{ bgcolor: '#ffebee' }}>
             <CardContent>
