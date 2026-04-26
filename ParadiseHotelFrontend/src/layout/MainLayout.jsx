@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import { Outlet, Link, useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { AuthContext } from '../context/AuthContext';
+import Footer from '../components/Footer';
+
+
 
 function MainLayout() {
   const { user, logout } = useContext(AuthContext);
@@ -54,6 +57,7 @@ function MainLayout() {
       <main style={{ padding: '2rem' }}>
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }
