@@ -20,6 +20,12 @@ function MainLayout() {
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppBar position="static">
         <Toolbar>
+          <Box
+            component="img"
+            src="/logoParadise.png"
+            alt="Paradise Hotel logo"
+            sx={{ width: 42, height: 42, mr: 1.5, objectFit: 'contain' }}
+          />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
             Paradise Hotel
           </Typography>

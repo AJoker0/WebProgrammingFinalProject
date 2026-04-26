@@ -28,7 +28,7 @@ function Footer() {
               Contact
             </Typography>
             <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>Email: support@paradisehotel.com</Typography>
-            <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>Phone: +1 (555) 123-4567</Typography>
+            <Typography variant="body2" sx={{ mb: 1, opacity: 0.8 }}>Phone: +8 (800) 555-3535</Typography>
             <Typography variant="body2" sx={{ opacity: 0.8 }}>Location: Varna, Bulgaria</Typography>
           </Grid>
         </Grid>
