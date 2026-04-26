@@ -9,6 +9,7 @@ function Reservations() {
   const [reservations, setReservations] = useState([]);
   const [error, setError] = useState('');
 
+  // Pull fresh list after login and after cancel actions.
   const fetchReservations = async () => {
     try {
       const response = await api.get('/reservations/me');
@@ -25,6 +26,7 @@ function Reservations() {
   }, [user]);
 
   const handleCancel = async (id) => {
+    // Quick confirmation to prevent accidental cancellations.
     if (window.confirm('Are you sure you want to cancel this reservation?')) {
       try {
         await api.delete(`/reservations/${id}`);

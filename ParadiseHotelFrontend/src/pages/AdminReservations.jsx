@@ -10,6 +10,7 @@ function AdminReservations() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // Admin endpoint returns all reservations across all users.
     const fetchAllReservations = async () => {
       try {
         const response = await api.get('/admin/reservations');

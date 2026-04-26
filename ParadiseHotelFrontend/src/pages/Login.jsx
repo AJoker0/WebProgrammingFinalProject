@@ -11,6 +11,7 @@ function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
+  // Reuse one change handler for both fields.
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,6 +19,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Backend returns token + user object on successful login.
       const response = await api.post('/auth/login', formData);
       const { token, user } = response.data;
 

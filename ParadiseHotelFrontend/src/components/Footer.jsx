@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Container, Grid, Link } from '@mui/material';
 
 function Footer() {
+  // Footer stays at the bottom thanks to layout flex settings.
   return (
     <Box component="footer" sx={{ bgcolor: '#1976d2', color: 'white', py: 6, mt: 'auto' }}>
       <Container maxWidth="lg">
@@ -18,9 +19,9 @@ function Footer() {
             <Typography variant="h6" gutterBottom fontWeight="bold">
               Quick Links
             </Typography>
-            <Link href="/" color="inherit" underline="hover" display="block" sx={{ mb: 1, opacity: 0.8 }}>Home</Link>
-            <Link href="/about" color="inherit" underline="hover" display="block" sx={{ mb: 1, opacity: 0.8 }}>About Us</Link>
-            <Link href="/login" color="inherit" underline="hover" display="block" sx={{ opacity: 0.8 }}>Login</Link>
+            <Link href="/" color="inherit" underline="hover" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>Home</Link>
+            <Link href="/about" color="inherit" underline="hover" sx={{ display: 'block', mb: 1, opacity: 0.8 }}>About Us</Link>
+            <Link href="/login" color="inherit" underline="hover" sx={{ display: 'block', opacity: 0.8 }}>Login</Link>
           </Grid>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom fontWeight="bold">

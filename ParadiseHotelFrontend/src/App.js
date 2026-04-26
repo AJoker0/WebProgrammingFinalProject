@@ -12,6 +12,8 @@ import AdminReservations from './pages/AdminReservations';
 import AdminLocations from './pages/AdminLocations';
 
 function App() {
+  // Keep all routes in one place so adding new pages is straightforward.
+  // Everything under /admin stays protected by AdminRoute.
   return (
     <BrowserRouter>
       <Routes>
@@ -21,9 +23,6 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="reservations" element={<Reservations />} />
-          
-
-          
           <Route path="admin" element={<AdminRoute />}>
             <Route index element={<AdminDashboard />} />
             <Route path="reservations" element={<AdminReservations />} />

@@ -4,22 +4,23 @@ import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { AuthContext } from '../context/AuthContext';
 import Footer from '../components/Footer';
 
-
-
 function MainLayout() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    // Drop auth state first, then move user to login screen.
     logout();
     navigate('/login');
   };
 
+  // Admin links are rendered only when user.role is admin.
+
   return (
-    <div>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
             Paradise Hotel
           </Typography>
           
@@ -27,7 +28,6 @@ function MainLayout() {
             <Button color="inherit" component={Link} to="/">Home</Button>
             <Button color="inherit" component={Link} to="/about">About</Button>
 
-            
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/reservations">My Reservations</Button>
@@ -40,25 +40,26 @@ function MainLayout() {
                   </>
                 )}
 
-                <Button color="inherit" onClick={handleLogout}>
+                <Button color="inherit" onClick={handleLogout} sx={{ ml: 2, border: '1px solid rgba(255,255,255,0.5)' }}>
                   Logout ({user.name})
                 </Button>
               </>
             ) : (
               <>
                 <Button color="inherit" component={Link} to="/login">Login</Button>
-                <Button color="inherit" component={Link} to="/register">Register</Button>
+                <Button color="inherit" component={Link} to="/register" sx={{ ml: 1, border: '1px solid rgba(255,255,255,0.5)' }}>Register</Button>
               </>
             )}
           </Box>
         </Toolbar>
       </AppBar>
       
-      <main style={{ padding: '2rem' }}>
+      <Box component="main" sx={{ p: 4, flexGrow: 1 }}>
         <Outlet />
-      </main>
+      </Box>
+      
       <Footer />
-    </div>
+    </Box>
   );
 }
 

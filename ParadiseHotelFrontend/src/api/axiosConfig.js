@@ -5,6 +5,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
+    // Attach token automatically so every protected request stays authenticated.
     const token = localStorage.getItem('token');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;

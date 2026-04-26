@@ -13,9 +13,10 @@ function AdminDashboard() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    // Load everything once when the page opens.
     const fetchDashboardData = async () => {
       try {
-        const response = await api.get('/api/admin/dashboard');
+        const response = await api.get('/admin/dashboard');
         setData(response.data);
       } catch (err) {
         setError('Failed to load dashboard data');
@@ -24,10 +25,20 @@ function AdminDashboard() {
     fetchDashboardData();
   }, []);
 
+  // Keep early returns simple: error first, then loading state.
   if (error) return <Alert severity="error" sx={{ m: 2 }}>{error}</Alert>;
   if (!data) return <Box display="flex" justifyContent="center" mt={10}><CircularProgress /></Box>;
 
+  // API already gives chart-ready arrays, so we just unpack and render.
   const { summary, reservationsByMonth, reservationsByLocation, reservationsByStatus } = data;
+
+  // One place for cards so we don't repeat typography + color setup.
+  const summaryCards = [
+    { label: 'Total Users', value: summary.totalUsers, color: '#2196f3' },
+    { label: 'Total Locations', value: summary.totalLocations, color: '#9c27b0' },
+    { label: 'Active Bookings', value: summary.activeReservations, color: '#4caf50' },
+    { label: 'Cancelled', value: summary.cancelledReservations, color: '#f44336' }
+  ];
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -35,14 +46,8 @@ function AdminDashboard() {
         Administrator Dashboard
       </Typography>
 
-      {/* --- СЕКЦИЯ 1: СУММАРНЫЕ КАРТОЧКИ --- */}
       <Grid container spacing={3} sx={{ mb: 5 }}>
-        {[
-          { label: 'Total Users', value: summary.totalUsers, color: '#2196f3' },
-          { label: 'Total Locations', value: summary.totalLocations, color: '#9c27b0' },
-          { label: 'Active Bookings', value: summary.activeReservations, color: '#4caf50' },
-          { label: 'Cancelled', value: summary.cancelledReservations, color: '#f44336' }
-        ].map((item, index) => (
+        {summaryCards.map((item, index) => (
           <Grid item xs={12} sm={6} md={3} key={index}>
             <Card sx={{ borderRadius: 3, boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
               <CardContent>
@@ -58,15 +63,12 @@ function AdminDashboard() {
         ))}
       </Grid>
 
-      {/* --- СЕКЦИЯ 2: ГРАФИКИ --- */}
       <Grid container spacing={4}>
-        
-        {/* График тренда бронирований (Bar Chart) */}
         <Grid item xs={12} lg={8}>
           <Paper sx={{ p: 3, borderRadius: 3, height: 400 }}>
             <Typography variant="h6" fontWeight="bold" gutterBottom>Reservations Trend (Monthly)</Typography>
             <ResponsiveContainer width="100%" height="90%">
-              <BarChart data={reservationsByMonth}>
+              <BarChart data={reservationsByMonth} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="month" />
                 <YAxis />
@@ -77,7 +79,6 @@ function AdminDashboard() {
           </Paper>
         </Grid>
 
-        {/* Статистика по статусам (Pie Chart) */}
         <Grid item xs={12} md={6} lg={4}>
           <Paper sx={{ p: 3, borderRadius: 3, height: 400 }}>
             <Typography variant="h6" fontWeight="bold" gutterBottom>Booking Status</Typography>
@@ -88,7 +89,7 @@ function AdminDashboard() {
                   dataKey="count"
                   nameKey="status"
                   cx="50%" cy="50%"
-                  outerRadius={80}
+                  outerRadius={60}
                   label
                 >
                   {reservationsByStatus.map((entry, index) => (
@@ -102,7 +103,6 @@ function AdminDashboard() {
           </Paper>
         </Grid>
 
-        {/* Бронирования по локациям (Pie Chart - Donut style) */}
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 3, borderRadius: 3, height: 400 }}>
             <Typography variant="h6" fontWeight="bold" gutterBottom>Bookings by Location</Typography>
@@ -113,8 +113,8 @@ function AdminDashboard() {
                   dataKey="count"
                   nameKey="name"
                   cx="50%" cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
+                  innerRadius={50}
+                  outerRadius={80}
                   paddingAngle={5}
                 >
                   {reservationsByLocation.map((entry, index) => (

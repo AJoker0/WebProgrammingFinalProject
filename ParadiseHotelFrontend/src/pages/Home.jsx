@@ -24,11 +24,13 @@ function Home() {
   const [error, setError] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
+  // One handler for all inputs (text, number, checkbox) keeps form code tidy.
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setSearchParams({ ...searchParams, [e.target.name]: value });
   };
 
+  // Search endpoint accepts the same shape as searchParams, so we pass it directly.
   const handleSearch = async (e) => {
     e.preventDefault();
     setError('');
@@ -42,6 +44,7 @@ function Home() {
     }
   };
 
+  // Booking is blocked for guests without login.
   const handleBookRoom = async (roomId) => {
     if (!user) {
       alert("Please log in to book a room!");
@@ -64,10 +67,19 @@ function Home() {
     }
   };
 
+  // Date fields switch type on focus so placeholder text still shows when empty.
+  const handleDateFocus = (e) => {
+    e.target.type = 'date';
+  };
+
+  const handleDateBlur = (e, fieldName) => {
+    if (!searchParams[fieldName]) {
+      e.target.type = 'text';
+    }
+  };
+
   return (
-    <Box sx={{ mt: -4, mx: -4 }}> {/* Компенсируем padding из MainLayout для полноэкранного баннера */}
-      
-      {/* === HERO SECTION (КРАСИВЫЙ БАННЕР) === */}
+    <Box sx={{ mt: -4, mx: -4 }}>
       <Box 
         sx={{ 
           height: { xs: '300px', md: '500px' },
@@ -92,7 +104,6 @@ function Home() {
         </Typography>
       </Box>
 
-      {/* === ПОИСКОВАЯ ФОРМА === */}
       <Box sx={{ maxWidth: 1200, mx: 'auto', px: 3 }}>
         <Box sx={{ p: { xs: 2, md: 4 }, mb: 6, bgcolor: 'background.paper', borderRadius: 3, boxShadow: '0 8px 32px rgba(0,0,0,0.08)', mt: { md: -12 }, position: 'relative', zIndex: 10 }}>
           <Typography variant="h5" fontWeight="bold" color="primary" gutterBottom>Find Your Perfect Room</Typography>
@@ -101,11 +112,11 @@ function Home() {
               
               <Grid item xs={12} sm={4}>
                 <TextField fullWidth label="Check-In" name="checkIn" required value={searchParams.checkIn} onChange={handleChange} 
-                  type={searchParams.checkIn ? "date" : "text"} onFocus={(e) => (e.target.type = "date")} onBlur={(e) => { if (!searchParams.checkIn) e.target.type = "text" }} />
+                  type={searchParams.checkIn ? "date" : "text"} onFocus={handleDateFocus} onBlur={(e) => handleDateBlur(e, 'checkIn')} />
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField fullWidth label="Check-Out" name="checkOut" required value={searchParams.checkOut} onChange={handleChange} 
-                  type={searchParams.checkOut ? "date" : "text"} onFocus={(e) => (e.target.type = "date")} onBlur={(e) => { if (!searchParams.checkOut) e.target.type = "text" }} />
+                  type={searchParams.checkOut ? "date" : "text"} onFocus={handleDateFocus} onBlur={(e) => handleDateBlur(e, 'checkOut')} />
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField fullWidth type="number" label="Guests" name="guests" required inputProps={{ min: 1 }} value={searchParams.guests} onChange={handleChange} />
@@ -135,7 +146,6 @@ function Home() {
           </form>
         </Box>
 
-        {/* === РЕЗУЛЬТАТЫ === */}
         {error && <Alert severity="error" sx={{ mb: 4 }}>{error}</Alert>}
 
         {hasSearched && rooms.length === 0 && (
@@ -146,7 +156,6 @@ function Home() {
           {rooms.map((room) => (
             <Grid item xs={12} md={6} lg={4} key={room.id}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', borderRadius: 3, boxShadow: '0 4px 12px rgba(0,0,0,0.05)', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-5px)', boxShadow: '0 12px 24px rgba(0,0,0,0.1)' } }}>
-                {/* Добавляем фейковую красивую картинку для комнаты */}
                 <CardMedia
                   component="img"
                   height="220"

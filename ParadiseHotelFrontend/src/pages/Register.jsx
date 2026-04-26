@@ -5,9 +5,9 @@ import api from '../api/axiosConfig';
 
 function Register() {
     const navigate = useNavigate();
-    // keep data from form
+  // Keep user input in one object so submit is easy.
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-    // keep error message
+  // Show backend validation message near the form.
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -15,14 +15,13 @@ function Register() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // prevent page refresh
+      e.preventDefault(); // Stop default reload on form submit.
         try {
-            // send POST request to backend
+        // Create account and redirect to login on success.
             await api.post('/auth/register', formData);
-            // if successful, navigate to login page
             navigate('/login');
         } catch (err) {
-            // backend returns error message in err.response.data.message
+        // Fall back to a generic message if backend response is missing.
             setError(err.response?.data?.message || 'Registration failed');
         }
     };

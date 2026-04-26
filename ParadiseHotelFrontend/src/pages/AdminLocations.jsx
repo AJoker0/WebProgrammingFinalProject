@@ -30,12 +30,14 @@ function AdminLocations() {
   useEffect(() => { fetchLocations(); }, []);
 
   const handleOpenCreate = () => {
+    // Reset form when creating a new location.
     setEditingId(null);
     setFormData({ name: '', city: '', address: '', description: '', rating: 5, hasFreeParking: false, hasWellnessCenter: false, imageUrl: '' });
     setOpen(true);
   };
 
   const handleOpenEdit = (loc) => {
+    // Pre-fill dialog with selected location values.
     setEditingId(loc.id);
     setFormData({
       name: loc.name, city: loc.city, address: loc.address, description: loc.description,
@@ -56,6 +58,7 @@ function AdminLocations() {
 
   const handleSave = async () => {
     try {
+      // Rating comes from text input, so cast it before sending.
       const dataToSend = { ...formData, rating: Number(formData.rating) };
 
       if (editingId) {
@@ -71,6 +74,7 @@ function AdminLocations() {
   };
 
   const handleDelete = async (id) => {
+    // Keep delete explicit because this action cannot be undone.
     if (window.confirm('Are you sure you want to delete this hotel?')) {
       try {
         await api.delete(`/admin/locations/${id}`);

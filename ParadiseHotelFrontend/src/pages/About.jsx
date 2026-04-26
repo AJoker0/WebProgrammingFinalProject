@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Card, CardContent, Grid } from '@mui/material';
 
 function About() {
+  // Static page: no API calls here, just project intro content.
   return (
     <Box sx={{ mt: 4, maxWidth: 1000, mx: 'auto' }}>
       <Typography variant="h3" gutterBottom align="center" color="primary">

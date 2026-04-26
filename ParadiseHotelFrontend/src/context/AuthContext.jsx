@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
+        // Restore session after refresh if both user and token are present.
         const storedUser = localStorage.getItem('user');
         const storedToken = localStorage.getItem('token');
 
@@ -15,6 +16,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = (userData, token) => {
+        // Save auth data in state + localStorage so protected pages work instantly.
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
         localStorage.setItem('token', token);
@@ -22,6 +24,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
+        // Clear everything on logout to avoid stale sessions.
         setUser(null);
         localStorage.removeItem('user');
         localStorage.removeItem('token');
