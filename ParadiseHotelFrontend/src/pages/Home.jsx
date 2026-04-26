@@ -67,17 +67,6 @@ function Home() {
     }
   };
 
-  // Date fields switch type on focus so placeholder text still shows when empty.
-  const handleDateFocus = (e) => {
-    e.target.type = 'date';
-  };
-
-  const handleDateBlur = (e, fieldName) => {
-    if (!searchParams[fieldName]) {
-      e.target.type = 'text';
-    }
-  };
-
   return (
     <Box sx={{ mt: -4, mx: -4 }}>
       <Box 
@@ -112,11 +101,27 @@ function Home() {
               
               <Grid item xs={12} sm={4}>
                 <TextField fullWidth label="Check-In" name="checkIn" required value={searchParams.checkIn} onChange={handleChange} 
-                  type={searchParams.checkIn ? "date" : "text"} onFocus={handleDateFocus} onBlur={(e) => handleDateBlur(e, 'checkIn')} />
+                  type="date"
+                  sx={{
+                    '& input[type="date"]::-webkit-datetime-edit': {
+                      color: searchParams.checkIn ? 'inherit' : 'transparent'
+                    },
+                    '& input[type="date"]:focus::-webkit-datetime-edit': {
+                      color: 'inherit'
+                    }
+                  }} />
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField fullWidth label="Check-Out" name="checkOut" required value={searchParams.checkOut} onChange={handleChange} 
-                  type={searchParams.checkOut ? "date" : "text"} onFocus={handleDateFocus} onBlur={(e) => handleDateBlur(e, 'checkOut')} />
+                  type="date"
+                  sx={{
+                    '& input[type="date"]::-webkit-datetime-edit': {
+                      color: searchParams.checkOut ? 'inherit' : 'transparent'
+                    },
+                    '& input[type="date"]:focus::-webkit-datetime-edit': {
+                      color: 'inherit'
+                    }
+                  }} />
               </Grid>
               <Grid item xs={12} sm={4}>
                 <TextField fullWidth type="number" label="Guests" name="guests" required inputProps={{ min: 1 }} value={searchParams.guests} onChange={handleChange} />

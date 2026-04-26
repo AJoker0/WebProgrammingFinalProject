@@ -5,9 +5,9 @@ import api from '../api/axiosConfig';
 
 function Register() {
     const navigate = useNavigate();
-  // Keep user input in one object so submit is easy.
+    // Keep user input in one object so submit is easy.
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
-  // Show backend validation message near the form.
+    // Show backend validation message near the form.
     const [error, setError] = useState('');
 
     const handleChange = (e) => {
@@ -45,6 +45,7 @@ function Register() {
           fullWidth margin="normal" label="Password" name="password" type="password"
           value={formData.password} onChange={handleChange} required
           helperText="Minimum 6 characters"
+          inputProps={{ minLength: 6 }} 
         />
         <Button fullWidth variant="contained" color="primary" type="submit" sx={{ mt: 2 }}>
           Create Account
