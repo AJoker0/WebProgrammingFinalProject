@@ -76,27 +76,37 @@ Add your screenshots here before submission.
 
 ### Home page
 
-![Home page screenshot](./screenshots/home-page.png)
+<img width="1245" height="765" alt="{EEA5AA0D-9E5C-48DE-94E3-598F33C8C5D7}" src="https://github.com/user-attachments/assets/b2a4157f-81ac-436b-9531-5519538131cf" />
+
 
 ### Login page
 
-![Login page screenshot](./screenshots/login-page.png)
+
+<img width="1246" height="767" alt="{E1D592FF-813C-4229-A08B-D453DEE639AA}" src="https://github.com/user-attachments/assets/9c2fe98c-202d-47cb-8f07-304d62171689" />
+
+<img width="1244" height="761" alt="{417F2D85-1000-498C-81EC-BA4D66661D98}" src="https://github.com/user-attachments/assets/e315d26c-88e9-49c6-ba9a-1ac5c905dfe4" />
+
 
 ### Room search results
 
-![Room search screenshot](./screenshots/room-search.png)
+<img width="1251" height="758" alt="{8D7FF8B3-F228-47E1-96D0-848B9BE40872}" src="https://github.com/user-attachments/assets/f9314de3-d8da-43b6-bc45-e6d099ddd558" />
+
 
 ### My Reservations
 
-![Reservations screenshot](./screenshots/reservations.png)
+<img width="1246" height="769" alt="{4AAD0F9D-D85F-4485-9C5F-8B831E01C62F}" src="https://github.com/user-attachments/assets/9b6d1bae-0f28-4629-9b45-99456ebde214" />
+
+<img width="363" height="222" alt="{F84869C1-3944-431B-9073-11C1703EEAA1}" src="https://github.com/user-attachments/assets/f5d590af-1fc0-4558-b2f8-01581ba4fda9" />
+
 
 ### Admin dashboard
+<img width="1244" height="761" alt="{88046C49-61C0-4DAF-BFEC-A0A1044C7674}" src="https://github.com/user-attachments/assets/83142ec2-44a9-401a-b8fc-c59bf963100d" />
 
-![Admin dashboard screenshot](./screenshots/admin-dashboard.png)
 
 ### Admin locations
 
-![Admin locations screenshot](./screenshots/admin-locations.png)
+<img width="1244" height="763" alt="{CEBACE1A-48E0-45FD-A7BA-D76C24973BE7}" src="https://github.com/user-attachments/assets/87e39966-0107-40f6-8211-410e9393fe19" />
+
 
 ## Implementation notes
 
