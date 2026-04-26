@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# Paradise Hotel
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Paradise Hotel is a React frontend for a hotel booking platform. It connects to the provided backend API and gives guests and administrators a clean, responsive interface for browsing hotels, checking room availability, making reservations, and managing hotel data.
 
-## Available Scripts
+## What this app does
 
-In the project directory, you can run:
+- Guest registration and login
+- Room search by dates, guest count, hotel name, city, rating, parking, and wellness filters
+- Reservation creation and cancellation
+- Personal reservations area for signed-in users
+- Admin dashboard with summary cards and reporting views
+- Admin reservations table
+- Admin locations CRUD interface
+- Public Home and About pages
 
-### `npm start`
+## Tech stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- React Router
+- Axios
+- Material UI
+- Local storage for auth token persistence
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project structure
 
-### `npm test`
+```text
+ParadiseHotelFrontend/
+├─ public/
+├─ src/
+│  ├─ api/
+│  ├─ components/
+│  ├─ context/
+│  ├─ layout/
+│  ├─ pages/
+│  ├─ App.js
+│  └─ index.js
+└─ package.json
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to run it locally
 
-### `npm run build`
+### 1. Install dependencies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Start the frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+The app will run in development mode on:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```text
+http://localhost:3000
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you are running the backend locally as well, start it from the backend folder with:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+npm run dev
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Environment notes
 
-## Learn More
+This frontend expects the backend API to be available and the auth token to be sent as a Bearer token for protected endpoints.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+If you need to adjust the backend URL, check the Axios configuration in `src/api/axiosConfig.js`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Screenshots
 
-### Code Splitting
+Add your screenshots here before submission.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Home page
 
-### Analyzing the Bundle Size
+![Home page screenshot](./screenshots/home-page.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Login page
 
-### Making a Progressive Web App
+![Login page screenshot](./screenshots/login-page.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Room search results
 
-### Advanced Configuration
+![Room search screenshot](./screenshots/room-search.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### My Reservations
 
-### Deployment
+![Reservations screenshot](./screenshots/reservations.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Admin dashboard
 
-### `npm run build` fails to minify
+![Admin dashboard screenshot](./screenshots/admin-dashboard.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Admin locations
+
+![Admin locations screenshot](./screenshots/admin-locations.png)
+
+## Implementation notes
+
+- Protected routes are handled on the client side.
+- Authentication state is stored in context and persisted in local storage.
+- The frontend follows the backend DTOs without changing the API contract.
+- Forms include validation and user-friendly error handling for common API responses.
+
+## Submission checklist
+
+- Git repository URL
+- Frontend source code
+- Working setup instructions
+- Word document with project description and run steps
+
+## Optional next step
+
+If you want, you can also add a short `About` section in the app itself that explains the fictional hotel brand and the course context.
